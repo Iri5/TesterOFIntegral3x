@@ -1,0 +1,11 @@
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\bin\Debug\Tester.exe.config
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\bin\Debug\Tester.exe
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\bin\Debug\Tester.pdb
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\obj\Debug\Tester.csproj.AssemblyReference.cache
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\obj\Debug\Tester.csproj.SuggestedBindingRedirects.cache
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\obj\Debug\Tester.Form1.resources
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\obj\Debug\Tester.Properties.Resources.resources
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\obj\Debug\Tester.csproj.GenerateResource.cache
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\obj\Debug\Tester.csproj.CoreCompileInputs.cache
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\obj\Debug\Tester.exe
+C:\Study\СПбГТИ\7_sem\Петров_ДН\СТПО\MyFiles\Tester\Tester\obj\Debug\Tester.pdb
