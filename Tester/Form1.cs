@@ -48,172 +48,7 @@ namespace Tester
             File.AppendAllLines(saveFileDialog1.FileName, txtbResN.Lines);
         }
 
-        private void button1_Click(object sender, EventArgs e)//генерация тест-кейсов
-        {
-            txtbRes.Clear();
-            txtbResN.Clear();
-
-            testsN = (int)numTestsN.Value;//кол-во тестов
-
-
-            eps = (double)numEps.Value;//погрешность
-            h = (double)txtbStep.Value;
-
-
-            if (txtbCoeff.Text == "")
-            {
-                MessageBox.Show("Введите коэффициенты полинома", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            coeff = txtbCoeff.Text.Split(' ');//коэффициенты полинома
-            for (int i = 0; i < coeff.Length; i++)
-            {
-                double coeffn = 0;
-                if (!double.TryParse(coeff[i], out coeffn))//проверка, является ли коэффициентом числом
-                {
-                    MessageBox.Show("Не все коэффициенты являются числами", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-
-            Random r = new Random();
-            if (left > right)
-            {
-                MessageBox.Show("Левая граница диапазона интегрирования должна быть меньше правой границы", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            int max = 1000;
-            int min = -1000;
-            for (int i = 0; i < testsN; i++)
-            {
-                if (positive)//позитивные тесты
-                {
-                    do
-                    {
-                        left = r.Next(min, max) * r.NextDouble();//левая граница интегрирования
-                        right = r.Next(min, max) * r.NextDouble();//правая граница интегрирования
-                    } while (left > right);
-
-                }
-                else//негативные тесты
-                {
-                    leftN = (char)r.Next(0x0410, 0x44F);
-                    rightN = (char)r.Next(0x0410, 0x44F);
-
-                }
-
-                var process = new Process();
-
-                process.StartInfo.FileName = @"C:\Integral3x\Release\Integral3x.exe";
-                if (positive)
-                {
-                    process.StartInfo.Arguments = left.ToString() + " "
-                    + right.ToString() + " "
-                    + h.ToString() + " "
-
-                    + method.ToString() + " "
-                    + txtbCoeff.Text;
-                }
-                else
-                {
-                    process.StartInfo.Arguments = leftN.ToString() + " "
-                    + rightN.ToString() + " "
-                    + h.ToString() + " "
-
-                    + method.ToString() + " "
-                    + txtbCoeff.Text;
-                }
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardInput = true;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.Start();
-
-                string YF = string.Empty;
-                YF = process.StandardOutput.ReadLine();//результат полученный из тестируемой праграммы
-                process.StandardInput.Write(Keys.Enter);
-                process.WaitForExit();
-
-                string YE = string.Empty;//ожидаемый результат
-                if (positive)
-                    YE = Integral().ToString();
-                else
-                    YE = "Левая граница диапазона не является числом!";
-                StringBuilder output = new StringBuilder();
-                char testsType = positive ? 'P' : 'N';
-                output.AppendLine("TEST " + (i + 1) + " " + testsType);
-                if (positive)
-                {
-                    output.AppendLine("X = "
-                                  + left.ToString() + " "
-                                  + right.ToString() + " "
-                                  + h.ToString() + " "
-                                  + method.ToString() + " "
-                                  + txtbCoeff.Text);
-
-                }
-                else
-                {
-                    output.AppendLine("X = "
-                                  + leftN.ToString() + " "
-                                  + rightN.ToString() + " "
-                                  + h.ToString() + " "
-                                  + method.ToString() + " "
-                                  + txtbCoeff.Text);
-                }
-                output.AppendLine("EPS = " + eps.ToString());
-                output.AppendLine("YE: " + YE);
-                output.AppendLine("YF: " + YF);
-
-                if (positive)
-                {
-                    try
-                    {
-                        double YF_ = double.Parse(YF.Substring(4).Replace('.', ','));
-
-                        double inaccuracy = Math.Abs(double.Parse(YE.Replace('.', ',')) - YF_);
-
-                        if (inaccuracy < eps)
-                        {
-                            output.AppendLine("|SYE-SYF| = " + inaccuracy.ToString() + " < " + eps.ToString());
-                            output.AppendLine("Тест пройден");
-                            result = true;
-                        }
-                        else
-                        {
-                            output.AppendLine("|SYE-SYF| = " + inaccuracy.ToString() + " > " + eps.ToString());
-                            output.AppendLine("Тест не пройден");
-                            result = false;
-                        }
-
-
-                    }
-                    catch { output.AppendLine("Тест не пройден"); result = false; }
-                }
-                else if (YE == YF)
-                {
-                    output.AppendLine("Тест пройден");
-                    result = true;
-                }
-                else if (YF != YE)
-                {
-                    result = false;
-                    output.AppendLine("Тест не пройден");
-                }
-                if (result)
-                {
-                    txtbRes.Text += output.ToString() + Environment.NewLine;
-                }
-                else
-                {
-                    txtbResN.Text += output.ToString() + Environment.NewLine;
-                }
-
-            }
-        }
+       
 
         private void radioButton_CheckedChanged(object sender, EventArgs e)
         {
@@ -240,7 +75,7 @@ namespace Tester
         {
             txtbRes.Clear();
             txtbResN.Clear();
-
+            txtbGener.Clear();
             testsN = (int)numTestsN.Value;//кол-во тестов
 
 
@@ -306,7 +141,7 @@ namespace Tester
                     output.AppendLine("X = "
                                   + left.ToString() + " "
                                   + right.ToString() + " "
-                                  + h.ToString() + " "
+                                  + h.ToString("0.######") + " "
                                   + method.ToString() + " "
                                   + txtbCoeff.Text);
 
@@ -316,7 +151,7 @@ namespace Tester
                     output.AppendLine("X = "
                                   + leftN.ToString() + " "
                                   + rightN.ToString() + " "
-                                  + h.ToString() + " "
+                                  + h.ToString("0.######") + " "
                                   + method.ToString() + " "
                                   + txtbCoeff.Text);
                 }
@@ -334,31 +169,19 @@ namespace Tester
             txtbResN.Clear();
             String[] ar = txtbGener.Lines;
            
-            for (int i = 0; i < ar.Length; i += 5)
+            for (int i = 0; i < ar.Length - 6; i += 5)
             {
-               
+
+                String T = ar[i];
                 String X = ar[i+1].Remove(0,3);
+                String E = ar[i + 2].Remove(0,5);
+                String type = ar[i].Substring(7,1);
                 var process = new Process();
 
                 process.StartInfo.FileName = @"C:\Integral3x\Release\Integral3x.exe";
-                if (positive)
-                {
-                    process.StartInfo.Arguments = left.ToString() + " "
-                    + right.ToString() + " "
-                    + h.ToString() + " "
-
-                    + method.ToString() + " "
-                    + txtbCoeff.Text;
-                }
-                else
-                {
-                    process.StartInfo.Arguments = leftN.ToString() + " "
-                    + rightN.ToString() + " "
-                    + h.ToString() + " "
-
-                    + method.ToString() + " "
-                    + txtbCoeff.Text;
-                }
+                
+                process.StartInfo.Arguments = X;
+                
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardInput = true;
                 process.StartInfo.UseShellExecute = false;
@@ -370,38 +193,17 @@ namespace Tester
                 process.StandardInput.Write(Keys.Enter);
                 process.WaitForExit();
 
-                string YE = string.Empty;//ожидаемый результат
-                if (positive)
-                    YE = Integral().ToString();
-                else
-                    YE = "Левая граница диапазона не является числом!";
+                string YE = ar[i+3].Remove(0, 4);//ожидаемый результат
+                
                 StringBuilder output = new StringBuilder();
-                char testsType = positive ? 'P' : 'N';
-                output.AppendLine("TEST " + (i + 1) + " " + testsType);
-                if (positive)
-                {
-                    output.AppendLine("X = "
-                                  + left.ToString() + " "
-                                  + right.ToString() + " "
-                                  + h.ToString() + " "
-                                  + method.ToString() + " "
-                                  + txtbCoeff.Text);
-
-                }
-                else
-                {
-                    output.AppendLine("X = "
-                                  + leftN.ToString() + " "
-                                  + rightN.ToString() + " "
-                                  + h.ToString() + " "
-                                  + method.ToString() + " "
-                                  + txtbCoeff.Text);
-                }
-                output.AppendLine("EPS = " + eps.ToString());
+                output.AppendLine(T);
+                output.AppendLine("X = " + X);
+                
+                output.AppendLine("EPS = " + E);
                 output.AppendLine("YE: " + YE);
                 output.AppendLine("YF: " + YF);
 
-                if (positive)
+                if (type == "P")
                 {
                     try
                     {
@@ -409,15 +211,15 @@ namespace Tester
 
                         double inaccuracy = Math.Abs(double.Parse(YE.Replace('.', ',')) - YF_);
 
-                        if (inaccuracy < eps)
+                        if (inaccuracy < Convert.ToDouble(E))
                         {
-                            output.AppendLine("|SYE-SYF| = " + inaccuracy.ToString() + " < " + eps.ToString());
+                            output.AppendLine("|SYE-SYF| = " + inaccuracy.ToString() + " < " + E);
                             output.AppendLine("Тест пройден");
                             result = true;
                         }
                         else
                         {
-                            output.AppendLine("|SYE-SYF| = " + inaccuracy.ToString() + " > " + eps.ToString());
+                            output.AppendLine("|SYE-SYF| = " + inaccuracy.ToString() + " > " + E);
                             output.AppendLine("Тест не пройден");
                             result = false;
                         }
@@ -446,6 +248,18 @@ namespace Tester
                 }
 
             }
+        }
+
+        private void btn_saveInput_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog2.ShowDialog() == DialogResult.Cancel) return;
+            File.WriteAllLines(saveFileDialog2.FileName, txtbGener.Lines);
+        }
+
+        private void btn_load_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.Cancel) return;
+            txtbGener.Text += File.ReadAllText(openFileDialog1.FileName);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

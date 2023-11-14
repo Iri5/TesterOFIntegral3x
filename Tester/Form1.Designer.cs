@@ -44,8 +44,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtbRes = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtbResN = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -53,6 +51,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btnGener = new System.Windows.Forms.Button();
             this.btnCulc = new System.Windows.Forms.Button();
+            this.btn_saveInput = new System.Windows.Forms.Button();
+            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+            this.btn_load = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtbResN = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numTestsN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numEps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtbStep)).BeginInit();
@@ -130,6 +133,11 @@
             this.numTestsN.Name = "numTestsN";
             this.numTestsN.Size = new System.Drawing.Size(120, 29);
             this.numTestsN.TabIndex = 8;
+            this.numTestsN.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // txtbCoeff
             // 
@@ -141,11 +149,17 @@
             // 
             // numEps
             // 
+            this.numEps.DecimalPlaces = 1;
             this.numEps.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numEps.Location = new System.Drawing.Point(225, 59);
             this.numEps.Name = "numEps";
             this.numEps.Size = new System.Drawing.Size(120, 29);
             this.numEps.TabIndex = 10;
+            this.numEps.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             // 
             // label5
             // 
@@ -159,17 +173,27 @@
             // 
             // txtbStep
             // 
-            this.txtbStep.DecimalPlaces = 3;
+            this.txtbStep.DecimalPlaces = 6;
             this.txtbStep.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbStep.Location = new System.Drawing.Point(225, 94);
+            this.txtbStep.Location = new System.Drawing.Point(224, 94);
             this.txtbStep.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             65536});
+            this.txtbStep.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            393216});
             this.txtbStep.Name = "txtbStep";
             this.txtbStep.Size = new System.Drawing.Size(120, 29);
             this.txtbStep.TabIndex = 12;
+            this.txtbStep.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            393216});
             // 
             // label6
             // 
@@ -211,48 +235,24 @@
             // txtbRes
             // 
             this.txtbRes.BackColor = System.Drawing.SystemColors.Window;
-            this.txtbRes.Location = new System.Drawing.Point(384, 59);
+            this.txtbRes.Location = new System.Drawing.Point(616, 101);
             this.txtbRes.Multiline = true;
             this.txtbRes.Name = "txtbRes";
+            this.txtbRes.ReadOnly = true;
             this.txtbRes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtbRes.Size = new System.Drawing.Size(218, 353);
+            this.txtbRes.Size = new System.Drawing.Size(218, 402);
             this.txtbRes.TabIndex = 17;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(28, 373);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(157, 39);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Сгенерировать";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtbResN
-            // 
-            this.txtbResN.Location = new System.Drawing.Point(626, 59);
-            this.txtbResN.Multiline = true;
-            this.txtbResN.Name = "txtbResN";
-            this.txtbResN.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtbResN.Size = new System.Drawing.Size(218, 355);
-            this.txtbResN.TabIndex = 19;
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(191, 373);
+            this.button2.Location = new System.Drawing.Point(28, 418);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(155, 39);
+            this.button2.Size = new System.Drawing.Size(321, 39);
             this.button2.TabIndex = 20;
-            this.button2.Text = "Сохранить";
+            this.button2.Text = "Сохранить результаты";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
@@ -260,7 +260,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Malgun Gothic", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(380, 33);
+            this.label7.Location = new System.Drawing.Point(612, 77);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(117, 21);
             this.label7.TabIndex = 21;
@@ -270,7 +270,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Malgun Gothic", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(622, 33);
+            this.label8.Location = new System.Drawing.Point(846, 77);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(136, 21);
             this.label8.TabIndex = 22;
@@ -279,22 +279,23 @@
             // txtbGener
             // 
             this.txtbGener.BackColor = System.Drawing.SystemColors.Window;
-            this.txtbGener.Location = new System.Drawing.Point(860, 59);
+            this.txtbGener.Location = new System.Drawing.Point(382, 101);
             this.txtbGener.Multiline = true;
             this.txtbGener.Name = "txtbGener";
+            this.txtbGener.ReadOnly = true;
             this.txtbGener.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtbGener.Size = new System.Drawing.Size(218, 353);
+            this.txtbGener.Size = new System.Drawing.Size(218, 402);
             this.txtbGener.TabIndex = 23;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Malgun Gothic", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(856, 33);
+            this.label9.Location = new System.Drawing.Point(378, 77);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(137, 21);
+            this.label9.Size = new System.Drawing.Size(103, 21);
             this.label9.TabIndex = 24;
-            this.label9.Text = "Сгенерировано:";
+            this.label9.Text = "Тест-кейсы:";
             // 
             // btnGener
             // 
@@ -304,11 +305,11 @@
             this.btnGener.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan;
             this.btnGener.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGener.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGener.Location = new System.Drawing.Point(28, 418);
+            this.btnGener.Location = new System.Drawing.Point(29, 373);
             this.btnGener.Name = "btnGener";
             this.btnGener.Size = new System.Drawing.Size(157, 39);
             this.btnGener.TabIndex = 25;
-            this.btnGener.Text = "Сгенерировать1";
+            this.btnGener.Text = "Сгенерировать";
             this.btnGener.UseVisualStyleBackColor = false;
             this.btnGener.Click += new System.EventHandler(this.btnGener_Click);
             // 
@@ -320,7 +321,7 @@
             this.btnCulc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan;
             this.btnCulc.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCulc.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCulc.Location = new System.Drawing.Point(191, 418);
+            this.btnCulc.Location = new System.Drawing.Point(192, 373);
             this.btnCulc.Name = "btnCulc";
             this.btnCulc.Size = new System.Drawing.Size(157, 39);
             this.btnCulc.TabIndex = 26;
@@ -328,12 +329,59 @@
             this.btnCulc.UseVisualStyleBackColor = false;
             this.btnCulc.Click += new System.EventHandler(this.btnCulc_Click);
             // 
+            // btn_saveInput
+            // 
+            this.btn_saveInput.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btn_saveInput.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_saveInput.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_saveInput.Location = new System.Drawing.Point(28, 463);
+            this.btn_saveInput.Name = "btn_saveInput";
+            this.btn_saveInput.Size = new System.Drawing.Size(321, 39);
+            this.btn_saveInput.TabIndex = 27;
+            this.btn_saveInput.Text = "Сохранить тест-кейсы";
+            this.btn_saveInput.UseVisualStyleBackColor = false;
+            this.btn_saveInput.Click += new System.EventHandler(this.btn_saveInput_Click);
+            // 
+            // btn_load
+            // 
+            this.btn_load.BackColor = System.Drawing.Color.PowderBlue;
+            this.btn_load.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_load.FlatAppearance.BorderSize = 0;
+            this.btn_load.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan;
+            this.btn_load.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_load.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_load.Location = new System.Drawing.Point(382, 25);
+            this.btn_load.Name = "btn_load";
+            this.btn_load.Size = new System.Drawing.Size(218, 39);
+            this.btn_load.TabIndex = 28;
+            this.btn_load.Text = "Загрузить из файла";
+            this.btn_load.UseVisualStyleBackColor = false;
+            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // txtbResN
+            // 
+            this.txtbResN.BackColor = System.Drawing.SystemColors.Window;
+            this.txtbResN.Location = new System.Drawing.Point(850, 101);
+            this.txtbResN.Multiline = true;
+            this.txtbResN.Name = "txtbResN";
+            this.txtbResN.ReadOnly = true;
+            this.txtbResN.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtbResN.Size = new System.Drawing.Size(218, 402);
+            this.txtbResN.TabIndex = 29;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
-            this.ClientSize = new System.Drawing.Size(1080, 487);
+            this.ClientSize = new System.Drawing.Size(1088, 524);
+            this.Controls.Add(this.txtbResN);
+            this.Controls.Add(this.btn_load);
+            this.Controls.Add(this.btn_saveInput);
             this.Controls.Add(this.btnCulc);
             this.Controls.Add(this.btnGener);
             this.Controls.Add(this.label9);
@@ -341,8 +389,6 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.txtbResN);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtbRes);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
@@ -356,8 +402,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Тестировщик Integral3x";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numTestsN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numEps)).EndInit();
@@ -387,8 +436,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtbRes;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtbResN;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
@@ -396,6 +443,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnGener;
         private System.Windows.Forms.Button btnCulc;
+        private System.Windows.Forms.Button btn_saveInput;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog2;
+        private System.Windows.Forms.Button btn_load;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox txtbResN;
     }
 }
 
